@@ -22,10 +22,12 @@
   },
   "scripts": {
     "lint": "npm-run-all --parallel lint:*",
-    "lint:html": "eslint *.html test --ext .html",
     "lint:js": "eslint *.js"
   },
   "devDependencies": {
     "@vaadin/vaadin-component-dev-dependencies": "^3.0.0"
+  },
+  "dependencies": {
+    "mobile-drag-drop": "^2.3.0-rc.1"
   }
 }
