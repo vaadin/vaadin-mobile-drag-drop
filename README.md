@@ -1,6 +1,6 @@
 # vaadin-mobile-drag-drop
 
-Imports a drag and drop polyfill for mobile devices that don't support HTML5 D&D natively. Includes special configuration for the polyfill to support Web Components (with shadow root).
+Imports a drag and drop [polyfill](https://github.com/timruffles/mobile-drag-drop) for mobile devices that don't support HTML5 D&D natively. Includes special configuration for the polyfill to support Web Components (with shadow root).
 
 ## Installation
 
