@@ -1,6 +1,6 @@
 # vaadin-mobile-drag-drop
 
-Imports a drag and drop [polyfill](https://github.com/timruffles/mobile-drag-drop) for mobile devices that don't support HTML5 D&D natively. Includes special configuration for the polyfill to support Web Components (with shadow root).
+Ships an initialization script for a drag and drop [polyfill](https://github.com/timruffles/mobile-drag-drop) for mobile devices that don't support HTML5 D&D natively. Includes special configuration for the polyfill to support Web Components (with shadow root).
 
 ## Installation
 
@@ -10,10 +10,11 @@ Imports a drag and drop [polyfill](https://github.com/timruffles/mobile-drag-dro
 bower i vaadin/vaadin-mobile-drag-drop --save
 ```
 
-Once installed, import it in your application:
+Once installed, import the polyfill and the initializer in your application:
 
 ```html
-<link rel="import" href="bower_components/vaadin-mobile-drag-drop/vaadin-mobile-drag-drop.html">
+<script src="bower_components/vaadin-mobile-drag-drop/mobile-drag-drop/release/index.min.js"></script>
+<script src="bower_components/vaadin-mobile-drag-drop/vaadin-mobile-drag-drop.js"></script>
 ```
 ### Npm
 
@@ -21,7 +22,8 @@ Once installed, import it in your application:
 npm install @vaadin/vaadin-mobile-drag-drop
 ```
 
-Once installed, import it in your application:
+Once installed, import the polyfill and the initializer in your application:
 
-```js
-import '@vaadin/vaadin-mobile-drag-drop/vaadin-mobile-drag-drop.js';
+```html
+<script src="node_modules/vaadin-mobile-drag-drop/mobile-drag-drop/index.min.js"></script>
+<script src="node_modules/vaadin-mobile-drag-drop/vaadin-mobile-drag-drop.js"></script>
