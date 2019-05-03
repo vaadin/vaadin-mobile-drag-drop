@@ -1,0 +1,145 @@
+<!doctype html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>vaadin-mobile-drag-drop tests</title>
+
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <script>
+    window.Vaadin = {};
+    window.Vaadin.__forceApplyMobileDragDrop = true;
+  </script>
+
+  <link rel="import" href="../vaadin-mobile-drag-drop.html">
+
+</head>
+
+<body>
+  <script>
+    customElements.define('inner-element', class extends HTMLElement {
+
+      constructor() {
+        super();
+        this.attachShadow({mode: "open"});
+        this.shadowRoot.innerHTML = `
+          <div id="droptarget">drop target</div>
+        `;
+
+        this.shadowRoot.querySelector('#droptarget')
+          .addEventListener('dragenter', e => e.preventDefault());
+      }
+
+    });
+
+    customElements.define('test-element', class extends HTMLElement {
+
+      constructor() {
+        super();
+        this.attachShadow({mode: "open"});
+        this.shadowRoot.innerHTML = `
+          <div draggable="true">draggable</div>
+          <inner-element></inner-element>
+        `;
+      }
+
+    });
+
+    const ITERATION_INTERVAL = 150;
+
+    const afterIteration = func => {
+      setTimeout(func, ITERATION_INTERVAL);
+    };
+
+    const fireTouchEvent = (type, element) => {
+      const event = new Event(type, {
+        bubbles: true,
+        composed: true
+      });
+      const rect = element.getBoundingClientRect();
+      const touch = {};
+      touch.clientX = touch.pageX = rect.left;
+      touch.clientY = touch.pageY = rect.top;
+      event.changedTouches = event.touches = [touch];
+      element.dispatchEvent(event);
+      return event;
+    };
+
+    describe('mobile drag drop', () => {
+      let element, draggable, dragStartSpy;
+
+      beforeEach(() => {
+        element = document.createElement('test-element');
+        document.body.appendChild(element);
+        draggable = element.shadowRoot.querySelector('[draggable]');
+        dragStartSpy = sinon.spy();
+        draggable.addEventListener('dragstart', dragStartSpy);
+      });
+
+      afterEach(() => {
+        fireTouchEvent('touchcancel', draggable);
+        document.body.removeChild(element);
+      })
+
+      it('should define window.Vaadin', () => {
+        expect(window.Vaadin).to.exist;
+      });
+
+      it('should not drag immediately', done => {
+        fireTouchEvent('touchstart', draggable);
+        setTimeout(() => {
+          fireTouchEvent('touchmove', draggable);
+          expect(dragStartSpy.called).to.be.false;
+          done();
+        }, 0);
+      });
+
+      it('should drag after a delay', done => {
+        fireTouchEvent('touchstart', draggable);
+        setTimeout(() => {
+          fireTouchEvent('touchmove', draggable);
+          expect(dragStartSpy.called).to.be.true;
+          done();
+        }, 300);
+      });
+
+      it('should not drag after a delay if touch moved', done => {
+        fireTouchEvent('touchstart', draggable);
+        fireTouchEvent('touchmove', draggable);
+        setTimeout(() => {
+          fireTouchEvent('touchmove', draggable);
+          expect(dragStartSpy.called).to.be.false;
+          done();
+        }, 300)
+      });
+
+      describe('dragging', () => {
+        let droptarget, dragOverSpy;
+
+        beforeEach(done => {
+          droptarget = element
+            .shadowRoot.querySelector('inner-element')
+            .shadowRoot.querySelector('#droptarget');
+          dragOverSpy = sinon.spy();
+          droptarget.addEventListener('dragover', dragOverSpy);
+          fireTouchEvent('touchstart', draggable);
+          setTimeout(() => {
+            fireTouchEvent('touchmove', draggable);
+            done();
+          }, 300);
+        });
+
+        it('should drag over', done => {
+          fireTouchEvent('touchmove', droptarget);
+          afterIteration(() => {
+            expect(dragOverSpy.called).to.be.true;
+            done();
+          });
+        });
+
+      });
+
+    });
+  </script>
+</body>
