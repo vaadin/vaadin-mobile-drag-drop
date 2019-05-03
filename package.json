@@ -1,8 +1,8 @@
 {
   "name": "@vaadin/vaadin-mobile-drag-drop",
-  "version": "2.1.3",
+  "version": "0.9.0",
   "description": "vaadin-mobile-drag-drop",
-  "main": "vaadin-mobile-drag-drop.html",
+  "main": "vaadin-mobile-drag-drop.js",
   "repository": "vaadin/vaadin-mobile-drag-drop",
   "keywords": [
     "Vaadin",
@@ -22,10 +22,12 @@
   },
   "scripts": {
     "lint": "npm-run-all --parallel lint:*",
-    "lint:html": "eslint *.html test --ext .html",
     "lint:js": "eslint *.js"
   },
   "devDependencies": {
     "@vaadin/vaadin-component-dev-dependencies": "^3.0.0"
+  },
+  "dependencies": {
+    "mobile-drag-drop": "^2.3.0-rc.1"
   }
 }

@@ -5,7 +5,7 @@
     "Vaadin Ltd"
   ],
   "description": "vaadin-mobile-drag-drop",
-  "main": "vaadin-mobile-drag-drop.html",
+  "main": "vaadin-mobile-drag-drop.js",
   "keywords": [
     "Vaadin",
     "web-components"
