@@ -40,13 +40,17 @@
     return true;
   }
 
-  if (window.MobileDragDrop.polyfill({
+  const config = {
     tryFindDraggableTarget,
-    elementFromPoint,
     dragStartConditionOverride,
     holdToDrag: 300,
     forceApply: window.Vaadin.__forceApplyMobileDragDrop
-  })) {
+  };
+  if (!window.ShadyDOM) {
+    config.elementFromPoint = elementFromPoint;
+  }
+
+  if (window.MobileDragDrop.polyfill(config)) {
     document.addEventListener('touchstart', e => {
       window.Vaadin.__mobilePolyfillTouchStartPath = e.composedPath();
     });
