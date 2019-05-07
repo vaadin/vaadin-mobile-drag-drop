@@ -1,6 +1,6 @@
 {
   "name": "@vaadin/vaadin-mobile-drag-drop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vaadin-mobile-drag-drop",
   "main": "index.min.js",
   "repository": "vaadin/vaadin-mobile-drag-drop",
