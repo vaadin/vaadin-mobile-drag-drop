@@ -14,7 +14,7 @@ Once installed, import the polyfill and the initializer in your application:
 
 ```html
 <script src="bower_components/mobile-drag-drop/release/index.min.js"></script>
-<script src="bower_components/vaadin-mobile-drag-drop/vaadin-mobile-drag-drop.js"></script>
+<script src="bower_components/vaadin-mobile-drag-drop/index.js"></script>
 ```
 ### Npm
 
@@ -26,4 +26,4 @@ Once installed, import the polyfill and the initializer in your application:
 
 ```html
 <script src="node_modules/mobile-drag-drop/index.min.js"></script>
-<script src="node_modules/vaadin-mobile-drag-drop/vaadin-mobile-drag-drop.js"></script>
+<script src="node_modules/vaadin-mobile-drag-drop/index.min.js"></script>
